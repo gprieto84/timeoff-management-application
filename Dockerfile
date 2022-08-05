@@ -14,29 +14,47 @@
 # 4. Login to running container (to update config (vi config/app.json): 
 #	docker exec -ti --user root alpine_timeoff /bin/sh
 # --------------------------------------------------------------------
-FROM alpine:latest as dependencies
-
-RUN apk add --no-cache \
-    nodejs npm 
-
-COPY package.json  .
-RUN npm install 
-
-FROM alpine:latest
-
-LABEL org.label-schema.schema-version="1.0"
-LABEL org.label-schema.docker.cmd="docker run -d -p 3000:3000 --name alpine_timeoff"
-
-RUN apk add --no-cache \
-    nodejs npm \
-    vim
-
-RUN adduser --system app --home /app
-USER app
-WORKDIR /app
-COPY . /app
-COPY --from=dependencies node_modules ./node_modules
-
-CMD npm start
+FROM node:14-alpine
 
 EXPOSE 3000
+
+LABEL org.label-schema.schema-version="1.3.0"
+LABEL org.label-schema.docker.cmd="docker run -d -p 3000:3000 --name timeoff-management"
+
+RUN apk update
+RUN apk upgrade
+# RUN apk add --no-cache --virtual python g++ make
+RUN apk add g++ make py3-pip
+#Install dependencies
+RUN apk add \
+    git \
+    gcc \
+    libc-dev \
+    clang
+
+#Update npm
+RUN npm install -g npm
+RUN npm config set unsafe-perm true
+
+WORKDIR /app
+
+#clone app
+COPY . timeoff-management
+WORKDIR /app/timeoff-management/config
+
+WORKDIR /app/timeoff-management
+#Add user so it doesn't run as root
+ARG user=app
+ARG uid=1111
+RUN adduser --system $user --home /app
+# RUN set -x ; \
+#     addgroup -g $uid -S $user ; \
+#     adduser -u $uid -D -S -G $user --system --home /app  $user \
+#     && exit 0 ; exit 1
+RUN chown -Rh $user /app
+USER $user
+
+#install app
+RUN npm install --build-from-source --python=/usr/bin/python3
+
+CMD npm start
