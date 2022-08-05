@@ -1,0 +1,6 @@
+bucket         = "tia-tf-state-sec-content"
+region         = "us-east-1"
+key            = "ids-testing-framework"
+dynamodb_table = "tia-terraform"
+cost_mgr       = "customer-1"
+env            = "dev"

@@ -1,7 +1,13 @@
-
+# Timeoff related
 *.swp
 *.swo
 *.swn
 *.swm
 node_modules/
 *.sqlite
+
+# Environment
+*.env
+
+# Terraform local state and Locks
+.terraform*
