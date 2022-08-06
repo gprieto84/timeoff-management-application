@@ -21,3 +21,9 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
+      - name: Terraform Init
+        run: ./scripts/tf_setup_workspace.sh
+      - name: Terraform Plan
+        run: ./scripts/tf_check_workspace.sh prod
+      - name: Terraform Apply
+        run: ./scripts/tf_apply_workspace.sh prod
