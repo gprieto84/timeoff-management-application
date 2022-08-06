@@ -24,7 +24,7 @@ for e in $env
     do
       echo "Destroying resources for $e in region $region"
       terraform workspace select $e
-      terraform destroy -var "env=$e" -var "region=$region" -var-file="envconfig/$e.tfvars" -auto-approve
+      terraform destroy -var "environment=$e" -var "region=$region" -var-file="envconfig/$e.tfvars" -auto-approve
     done
 
 terraform workspace select $SAVED_WORKSPACE

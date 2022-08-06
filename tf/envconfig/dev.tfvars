@@ -1,6 +1,11 @@
-bucket         = "tia-tf-state-sec-content"
-region         = "us-east-1"
-key            = "ids-testing-framework"
-dynamodb_table = "tia-terraform"
-cost_mgr       = "customer-1"
-env            = "dev"
+name               = "timeoff"
+bucket             = "gprieto-tf-state"
+region             = "us-east-1"
+key                = "timeoff"
+dynamodb_table     = "tf-lock-db"
+cost_mgr           = "customer-1"
+environment        = "dev"
+cidr               = "10.0.0.0/16"
+private_subnets    = ["10.0.0.0/20", "10.0.32.0/20"]
+public_subnets     = ["10.0.16.0/20", "10.0.48.0/20"]
+availability_zones = ["us-east-1a", "us-east-1b"]

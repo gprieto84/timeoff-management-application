@@ -10,7 +10,7 @@ fi
 set -e
 
 echo "Setting terraform project"
-terraform init --backend-config="envconfig/backend.tfvars"
+terraform init --backend-config="envconfig/backend.tfvars" -migrate-state
 
 echo "Attempting to create terraform workspaces..."
 terraform workspace select prod || terraform workspace new prod
