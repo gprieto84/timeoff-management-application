@@ -3,13 +3,17 @@ resource "aws_ecs_cluster" "timeoff_cluster" {
   name = "timeoff-cluster-${var.env}"
 }
 
+data "aws_ecr_repository" "timeoff_ecr_repo" {
+  name = "timeoff-ecr-repo"
+}
+
 resource "aws_ecs_task_definition" "timeoff_task" {
   family                   = "timeoff-task"
   container_definitions    = <<DEFINITION
   [
     {
       "name": "timeoff-task",
-      "image": "${aws_ecr_repository.timeoff_ecr_repo.repository_url}",
+      "image": "${data.aws_ecr_repository.timeoff_ecr_repo.repository_url}",
       "essential": true,
       "portMappings": [
         {
