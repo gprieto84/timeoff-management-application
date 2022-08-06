@@ -25,6 +25,6 @@ jobs:
       - name: Terraform Init
         run: ./scripts/tf_setup_workspace.sh
       - name: Terraform Plan
-        run: ./scripts/tf_check_workspace.sh prod
+        run: ./scripts/tf_check_updates.sh prod
       - name: Terraform Apply
-        run: ./scripts/tf_apply_workspace.sh prod
+        run: ./scripts/tf_apply_updates.sh prod
