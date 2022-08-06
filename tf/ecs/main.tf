@@ -1,4 +1,3 @@
-
 resource "aws_iam_role" "ecs_task_execution_role" {
   name = "${var.name}-ecsTaskExecutionRole"
 
@@ -155,9 +154,6 @@ resource "aws_ecs_service" "main" {
     container_port   = var.container_port
   }
 
-  # we ignore task_definition changes as the revision changes on deploy
-  # of a new version of the application
-  # desired_count is ignored as it can change due to autoscaling policy
   lifecycle {
     ignore_changes = [desired_count]
   }

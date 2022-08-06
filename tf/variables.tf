@@ -20,7 +20,7 @@ variable "cost_mgr" {
 
 
 variable "name" {
-  description = "the name of your stack, e.g. \"demo\""
+  description = "App Name"
 }
 
 variable "environment" {
