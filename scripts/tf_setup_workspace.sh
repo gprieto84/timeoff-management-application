@@ -13,7 +13,7 @@ echo "Setting terraform project"
 terraform init --backend-config="envconfig/backend.tfvars"
 
 echo "Attempting to create terraform workspaces..."
-terraform workspace new dev
-terraform workspace new prod
+terraform workspace select prod || terraform workspace new prod
+terraform workspace select dev || terraform workspace new dev
 
 echo "Done"
