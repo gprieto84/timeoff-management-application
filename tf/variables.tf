@@ -23,6 +23,10 @@ variable "name" {
   description = "App Name"
 }
 
+variable "test" {
+  description = "Test variable"
+}
+
 variable "environment" {
   description = "the name of your environment, e.g. \"prod\""
   default     = "prod"

@@ -1,13 +1,13 @@
 variable "name" {
-  description = "the name of your stack, e.g. \"demo\""
+  description = "App name"
 }
 
 variable "environment" {
-  description = "the name of your environment, e.g. \"prod\""
+  description = "dev or prod"
 }
 
 variable "region" {
-  description = "the AWS region in which resources are created"
+  description = ""
 }
 
 variable "subnets" {
